@@ -5,15 +5,16 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.event.entity.living.MobSpawnEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 @Mod(value = SaveTheHorse.MOD_ID)
-@Mod.EventBusSubscriber(modid = SaveTheHorse.MOD_ID)
+@EventBusSubscriber(modid = SaveTheHorse.MOD_ID)
 public final class SaveTheHorse {
     public static final String MOD_ID = "savethehorse";
     public static final Logger LOGGER = LogManager.getLogger(SaveTheHorse.class);
@@ -34,7 +35,7 @@ public final class SaveTheHorse {
     };
 
     @SubscribeEvent
-    public static void onHorseSpawn(MobSpawnEvent.@NotNull FinalizeSpawn event) {
+    public static void onHorseSpawn(@NotNull FinalizeSpawnEvent event) {
         if (!(event.getEntity() instanceof AbstractHorse horse)) return;
 
         ServerLevel level = event.getLevel().getLevel();
