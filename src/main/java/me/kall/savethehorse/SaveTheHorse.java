@@ -5,7 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.event.entity.living.MobSpawnEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
@@ -34,10 +34,10 @@ public final class SaveTheHorse {
     };
 
     @SubscribeEvent
-    public static void onHorseSpawn(MobSpawnEvent.@NotNull FinalizeSpawn event) {
+    public static void onHorseSpawn(LivingSpawnEvent.@NotNull CheckSpawn event) {
         if (!(event.getEntity() instanceof AbstractHorse horse)) return;
+        if (!(event.getLevel() instanceof ServerLevel level)) return;
 
-        ServerLevel level = event.getLevel().getLevel();
         double x = event.getX();
         double y = event.getY();
         double z = event.getZ();
