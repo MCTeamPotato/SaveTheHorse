@@ -44,7 +44,9 @@ public final class SaveTheHorse {
         double z = event.getZ();
 
         Runnable task = new Runnable() {
+            private int tries;
             public void run() {
+                if (tries >= 20) return;
                 if (level.isLoaded(horse.blockPosition()) && level.getEntity(horse.getId()) != null) {
                     if (isSafe(horse, level, x, y, z)) return;
 
@@ -59,6 +61,7 @@ public final class SaveTheHorse {
                         }
                     }
                 } else {
+                    tries++;
                     Executor.runAfter(1, this);
                 }
             }
