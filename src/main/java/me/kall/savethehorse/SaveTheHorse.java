@@ -36,7 +36,7 @@ public final class SaveTheHorse {
     @SubscribeEvent
     public static void onHorseSpawn(LivingSpawnEvent.@NotNull CheckSpawn event) {
         if (!(event.getEntity() instanceof AbstractHorse horse)) return;
-        if (!(event.getLevel() instanceof ServerLevel level)) return;
+        if (!(event.getWorld() instanceof ServerLevel level)) return;
 
         double x = event.getX();
         double y = event.getY();
